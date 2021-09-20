@@ -15,10 +15,11 @@ app.use(bodyParser.json())
 
 //Importing routes
 const authRoutes = require('./routes/auth');
-
+const userDataRoutes = require('./routes/userData');
 
 //Enabling Routes in app
-app.use(authRoutes) ;
+app.use("/auth",authRoutes) ;
+app.use("/user",userDataRoutes) ;
 
 
 //error Handler

@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const emailValidator = require("../helpers/validateEmail") ;
 const contactValidator = require("../helpers/validateContact") ;
+const secrets = require("../config/secrets") ;
 
 // Controller to handle user Login
 exports.postLogin = (req, res, next) => {
@@ -23,9 +24,9 @@ exports.postLogin = (req, res, next) => {
                     if (passwordMatches) {
                         // Create a jwt with user email
                         const token = jwt.sign({
-                            "email": user.email
+                            "email": user.email_id
                         },
-                        "This is a secret code",
+                        secrets.JWTsecret,
                         { expiresIn: "1h" });
 
                         return res.status(200).json({
