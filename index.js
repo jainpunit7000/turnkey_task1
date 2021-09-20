@@ -13,13 +13,17 @@ const MONGO_DB_URI = "mongodb+srv://pjain:DyMpOzlue13h13xP@cluster0.gxnuq.mongod
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 
+//Importing routes
+const authRoutes = require('./routes/auth');
 
-//Creating a test Api
-app.use("/",(req,res,next) => {
-    console.log("GET / request received") ;
-    return res.status(200).json({
-        message : "test GET request Successful"
-    })
+
+//Enabling Routes in app
+app.use(authRoutes) ;
+
+
+//error Handler
+app.use((req,res,next) => {
+    res.status(404).json({message:"Page not Found"}) ;
 })
 
 
